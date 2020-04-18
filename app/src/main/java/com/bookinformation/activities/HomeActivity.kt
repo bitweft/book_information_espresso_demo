@@ -9,28 +9,28 @@ import androidx.core.widget.addTextChangedListener
 import com.example.bookinformation.R
 
 class HomeActivity : AppCompatActivity() {
-    lateinit var enterButton: Button
-    lateinit var userName: EditText
-
+    private lateinit var searchButton: Button
+    private lateinit var bookName: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        userName = findViewById(R.id.user_name)
-        enterButton = findViewById(R.id.enter_books_button)
+        bookName = findViewById(R.id.book_name)
+        searchButton = findViewById(R.id.search_books)
 
-        userName.addTextChangedListener { enableButton() }
-        enterButton.setOnClickListener { enterBooksList() }
+        bookName.addTextChangedListener { conditionallyEnableButton() }
+        searchButton.setOnClickListener { enterBooksList() }
     }
 
-    private fun enableButton() {
-        enterButton.isEnabled = userName.text.trim().isNotEmpty()
+    private fun conditionallyEnableButton() {
+        searchButton.isEnabled = bookName.text.trim().isNotEmpty()
     }
 
     private fun enterBooksList() {
+        val bookName = bookName.text.toString()
         val intent = Intent(this, BookListActivity::class.java).apply {
-            putExtra("userName", userName.text.toString())
+            putExtra("bookName", bookName)
         }
         startActivity(intent)
     }

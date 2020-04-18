@@ -11,23 +11,23 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/user_name"
+            android:id="@+id/book_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:hint="@string/enter_your_name">
+            android:hint="@string/search_book">
 
             <requestFocus />
 
         </EditText>
 
         <Button
-            android:id="@+id/enter_books_button"
+            android:id="@+id/search_books"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:enabled="false"
-            android:text="@string/enter_books_list" />
+            android:text="@string/search_books" />
     </LinearLayout>
 
 
