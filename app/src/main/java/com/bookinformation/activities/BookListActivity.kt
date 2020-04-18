@@ -1,7 +1,8 @@
-package com.example.bookinformation
+package com.bookinformation.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.bookinformation.R
 
 class BookListActivity : AppCompatActivity() {
 
