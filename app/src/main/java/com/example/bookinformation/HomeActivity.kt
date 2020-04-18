@@ -1,5 +1,6 @@
 package com.example.bookinformation
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -27,6 +28,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun enterBooksList() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val intent = Intent(this, BookListActivity::class.java).apply {
+            putExtra("userName", userName.text.toString())
+        }
+        startActivity(intent)
     }
 }
