@@ -50,7 +50,6 @@ class BookListActivity : AppCompatActivity() {
                             bookAdapter.add(book)
                         }
                         bookAdapter.notifyDataSetChanged()
-
                     }
                 }
 

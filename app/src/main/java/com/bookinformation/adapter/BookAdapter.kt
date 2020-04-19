@@ -4,9 +4,11 @@ import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import com.bookinformation.models.Book
 import com.example.bookinformation.R
+import com.squareup.picasso.Picasso
 
 
 class BookAdapter(private val context: Activity, private val books: List<Book>) :
@@ -17,8 +19,10 @@ class BookAdapter(private val context: Activity, private val books: List<Book>) 
         val rowView = inflater.inflate(R.layout.book_result_detail, null, true)
 
         val titleText = rowView.findViewById(R.id.title) as TextView
+        val coverImage = rowView.findViewById(R.id.book_image) as ImageView
 
         titleText.text = books[position].title
+        Picasso.get().load(books[position].coverUrl).into(coverImage)
 
         return rowView
     }
