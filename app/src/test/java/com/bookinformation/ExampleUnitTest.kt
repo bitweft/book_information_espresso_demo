@@ -1,4 +1,4 @@
-package com.example.bookinformation
+package com.bookinformation
 
 import org.junit.Test
 
