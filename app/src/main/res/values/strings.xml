@@ -8,4 +8,5 @@
     <string name="book_detail">Book Details</string>
     <string name="search_results">Search Results</string>
     <string name="world_of_books">World of Books</string>
+    <string name="book_cover_image">Book Cover Image</string>
 </resources>

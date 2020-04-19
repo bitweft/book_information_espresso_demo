@@ -22,7 +22,10 @@ class BookAdapter(private val context: Activity, private val books: List<Book>) 
         val title = rowView.findViewById(R.id.title) as TextView
         val author = rowView.findViewById(R.id.author) as TextView
 
-        Picasso.get().load(books[position].coverUrl).into(coverImage)
+        Picasso.get().load(books[position].coverUrl)
+            .fit()
+            .placeholder(R.drawable.empty_book_result)
+            .into(coverImage)
         title.text = books[position].title
         author.text = books[position].author
 

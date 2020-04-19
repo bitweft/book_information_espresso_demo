@@ -48,7 +48,10 @@ class BookDetailActivity : AppCompatActivity() {
 
                 runOnUiThread {
                     run {
-                        Picasso.get().load(bookDetail.coverUrl).into(bookImage)
+                        Picasso.get().load(bookDetail.coverUrl)
+                            .fit()
+                            .placeholder(R.drawable.empty_book_detail)
+                            .into(bookImage)
                         title.text = bookDetail.title
                         author.text = bookDetail.author
                         publishDate.text = bookDetail.publishDate

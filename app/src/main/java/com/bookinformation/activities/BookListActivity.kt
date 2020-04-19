@@ -39,14 +39,14 @@ class BookListActivity : AppCompatActivity() {
         progressBar.visibility = ProgressBar.VISIBLE
         BookApiClient().searchBooks(bookName, callback())
 
-        lvBooks.setOnItemClickListener { adapterView: AdapterView<*>, view: View, position: Int, id: Long ->
-            selectBook(adapterView, view, position, id)
+        lvBooks.setOnItemClickListener { _: AdapterView<*>, _: View, position: Int, _: Long ->
+            selectBook(position)
         }
     }
 
-    private fun selectBook(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
+    private fun selectBook(position: Int) {
         val intent = Intent(this, BookDetailActivity::class.java).apply {
-               putExtra("bookId", bookAdapter.getItem(position)?.bookId.toString())
+            putExtra("bookId", bookAdapter.getItem(position)?.bookId.toString())
         }
         startActivity(intent)
     }
