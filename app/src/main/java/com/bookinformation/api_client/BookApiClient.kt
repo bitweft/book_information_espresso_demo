@@ -25,8 +25,8 @@ class BookApiClient {
             .scheme("http")
             .host(host)
             .addPathSegment(searchListPath)
-            .addEncodedQueryParameter("title", bookName)
-            .addEncodedQueryParameter("limit", "15")
+            .addQueryParameter("title", bookName)
+            .addQueryParameter("limit", "15")
             .build()
     }
 

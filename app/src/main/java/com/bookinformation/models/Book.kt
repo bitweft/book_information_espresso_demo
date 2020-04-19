@@ -19,11 +19,13 @@ data class Book(val title: String, val coverUrl: String, val author: String, val
         }
 
         private fun getBookId(book: JSONObject): String {
-            if (book.has(coverEditionKey)) {
-                return book.getString(coverEditionKey)
-            } else {
-                val ids = book.getJSONArray(editionKey)
-                return ids.getString(0)
+            return when {
+                book.has(coverEditionKey) -> book.getString(coverEditionKey)
+                book.has(editionKey) -> {
+                    val ids = book.getJSONArray(editionKey)
+                    ids.getString(0)
+                }
+                else -> ""
             }
         }
 
