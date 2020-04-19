@@ -2,6 +2,7 @@ package com.bookinformation.activities
 
 import android.os.Bundle
 import android.widget.ListView
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.bookinformation.adapter.BookAdapter
 import com.bookinformation.api_client.BookApiClient
@@ -17,6 +18,7 @@ import java.util.ArrayList
 class BookListActivity : AppCompatActivity() {
     private lateinit var lvBooks: ListView
     private lateinit var bookAdapter: BookAdapter
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,10 +27,13 @@ class BookListActivity : AppCompatActivity() {
         val books = ArrayList<Book>()
         bookAdapter = BookAdapter(this, books)
 
+        progressBar = findViewById(R.id.progress_bar)
         lvBooks = findViewById(R.id.lv_books)
         lvBooks.adapter = bookAdapter
 
         val bookName = intent?.extras?.getString("bookName").toString()
+
+        progressBar.visibility = ProgressBar.VISIBLE
         BookApiClient().searchBooks(bookName, callback())
     }
 
@@ -50,6 +55,7 @@ class BookListActivity : AppCompatActivity() {
                             bookAdapter.add(book)
                         }
                         bookAdapter.notifyDataSetChanged()
+                        progressBar.visibility = ProgressBar.GONE
                     }
                 }
 
