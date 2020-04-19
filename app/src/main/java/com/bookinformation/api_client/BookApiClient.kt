@@ -13,6 +13,11 @@ class BookApiClient {
         HttpHelper().getResponse(url, callback)
     }
 
+    fun getBookDetails(bookId: String, callback: Callback) {
+        val url = getBookDetailsUrl(bookId)
+        HttpHelper().getResponse(url, callback)
+    }
+
     private fun getSearchBooksUrl(bookName: String): HttpUrl {
         val searchListPath = "search.json"
 
@@ -22,6 +27,16 @@ class BookApiClient {
             .addPathSegment(searchListPath)
             .addEncodedQueryParameter("title", bookName)
             .addEncodedQueryParameter("limit", "15")
+            .build()
+    }
+
+    private fun getBookDetailsUrl(bookId: String): HttpUrl {
+        val bookDetailPath = "books"
+        return HttpUrl.Builder()
+            .scheme("http")
+            .host(host)
+            .addPathSegment(bookDetailPath)
+            .addPathSegment("$bookId.json")
             .build()
     }
 }

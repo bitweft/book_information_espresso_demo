@@ -1,6 +1,9 @@
 package com.bookinformation.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +38,17 @@ class BookListActivity : AppCompatActivity() {
 
         progressBar.visibility = ProgressBar.VISIBLE
         BookApiClient().searchBooks(bookName, callback())
+
+        lvBooks.setOnItemClickListener { adapterView: AdapterView<*>, view: View, position: Int, id: Long ->
+            selectBook(adapterView, view, position, id)
+        }
+    }
+
+    private fun selectBook(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
+        val intent = Intent(this, BookDetailActivity::class.java).apply {
+               putExtra("bookId", bookAdapter.getItem(position)?.bookId.toString())
+        }
+        startActivity(intent)
     }
 
     private fun callback(): Callback {

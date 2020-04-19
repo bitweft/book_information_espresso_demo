@@ -2,4 +2,7 @@
     <string name="app_name">Books Information</string>
     <string name="search_book">Book Name</string>
     <string name="search_books">Search Books</string>
+    <string name="by">By</string>
+    <string name="publishing_year">Publishing Year:</string>
+    <string name="number_of_pages">Number of Pages:</string>
 </resources>
