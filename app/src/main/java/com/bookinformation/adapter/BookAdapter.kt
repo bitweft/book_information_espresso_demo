@@ -13,16 +13,18 @@ import com.squareup.picasso.Picasso
 
 class BookAdapter(private val context: Activity, private val books: List<Book>) :
     ArrayAdapter<Book>(context, R.layout.book_result_detail, books) {
-    override fun getView(position: Int, view: View?, parent: ViewGroup): View {
 
+    override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         val inflater = context.layoutInflater
         val rowView = inflater.inflate(R.layout.book_result_detail, null, true)
 
-        val titleText = rowView.findViewById(R.id.title) as TextView
         val coverImage = rowView.findViewById(R.id.book_image) as ImageView
+        val title = rowView.findViewById(R.id.title) as TextView
+        val author = rowView.findViewById(R.id.author) as TextView
 
-        titleText.text = books[position].title
         Picasso.get().load(books[position].coverUrl).into(coverImage)
+        title.text = books[position].title
+        author.text = books[position].author
 
         return rowView
     }
