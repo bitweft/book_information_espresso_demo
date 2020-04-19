@@ -11,9 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.bookinformation.activities.BookDetailActivity" />
-        <activity android:name="com.bookinformation.activities.BookListActivity" />
-        <activity android:name="com.bookinformation.activities.HomeActivity">
+        <activity
+            android:name="com.bookinformation.activities.BookDetailActivity"
+            android:label="@string/book_detail" />
+        <activity
+            android:name="com.bookinformation.activities.BookListActivity"
+            android:label="@string/search_results" />
+        <activity
+            android:name="com.bookinformation.activities.HomeActivity"
+            android:label="@string/world_of_books">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
