@@ -1,12 +1,10 @@
 package com.bookinformation.activities
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ListView
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bookinformation.adapter.BookAdapter
 import com.bookinformation.api_client.BookApiClient
 import com.bookinformation.models.Book
@@ -19,36 +17,26 @@ import java.io.IOException
 import java.util.ArrayList
 
 class BookListActivity : AppCompatActivity() {
-    private lateinit var lvBooks: ListView
+    private lateinit var recyclerView: RecyclerView
     private lateinit var bookAdapter: BookAdapter
     private lateinit var progressBar: ProgressBar
+    private val books = ArrayList<Book>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_list)
 
-        val books = ArrayList<Book>()
-        bookAdapter = BookAdapter(this, books)
+        bookAdapter = BookAdapter(books)
 
-        progressBar = findViewById(R.id.progress_bar)
-        lvBooks = findViewById(R.id.lv_books)
-        lvBooks.adapter = bookAdapter
+        recyclerView = findViewById(R.id.books_list)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = bookAdapter
 
         val bookName = intent?.extras?.getString("bookName").toString()
 
+        progressBar = findViewById(R.id.progress_bar)
         progressBar.visibility = ProgressBar.VISIBLE
         BookApiClient().searchBooks(bookName, callback())
-
-        lvBooks.setOnItemClickListener { _: AdapterView<*>, _: View, position: Int, _: Long ->
-            selectBook(position)
-        }
-    }
-
-    private fun selectBook(position: Int) {
-        val intent = Intent(this, BookDetailActivity::class.java).apply {
-            putExtra("bookId", bookAdapter.getItem(position)?.bookId.toString())
-        }
-        startActivity(intent)
     }
 
     private fun callback(): Callback {
@@ -60,17 +48,14 @@ class BookListActivity : AppCompatActivity() {
 
             private fun displayBooks(response: String) {
                 val bookSearchResponse = BookSearchResponse.getBookSearchResponse(response)
-                val books = bookSearchResponse.books
+                val booksResponse = bookSearchResponse.books
 
                 runOnUiThread {
-                    run {
-                        bookAdapter.clear()
-                        for (book in books) {
-                            bookAdapter.add(book)
-                        }
-                        bookAdapter.notifyDataSetChanged()
-                        progressBar.visibility = ProgressBar.GONE
+                    for (book in booksResponse) {
+                        books.add(book)
                     }
+                    bookAdapter.notifyItemInserted(books.size - 1)
+                    progressBar.visibility = ProgressBar.GONE
                 }
 
             }
