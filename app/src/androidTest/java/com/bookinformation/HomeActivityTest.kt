@@ -23,7 +23,7 @@ import org.junit.runner.RunWith
 class HomeActivityTest {
 
     @get:Rule
-    val activityRule = ActivityTestRule(HomeActivity::class.java)
+    val activityRule = ActivityTestRule(HomeActivity::class.java, true, true)
 
     @Test
     fun checkSearchButtonIsDisabledWhenNoText() {
@@ -62,6 +62,6 @@ class HomeActivityTest {
         onView(withId(R.id.book_name)).perform(typeText("harry"))
         onView(withId(R.id.search_books)).perform(click())
 
-        onView(withId(R.id.lv_books)).check(matches(isDisplayed()))
+        onView(withId(R.id.books_list)).check(matches(isDisplayed()))
     }
 }

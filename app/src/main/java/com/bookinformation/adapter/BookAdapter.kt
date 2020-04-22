@@ -1,34 +1,58 @@
 package com.bookinformation.adapter
 
-import android.app.Activity
+import android.content.Intent
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.bookinformation.activities.BookDetailActivity
 import com.bookinformation.models.Book
 import com.example.bookinformation.R
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.book_result_detail.view.*
 
 
-class BookAdapter(private val context: Activity, private val books: List<Book>) :
-    ArrayAdapter<Book>(context, R.layout.book_result_detail, books) {
+class BookAdapter(private val books: ArrayList<Book>) :
+    RecyclerView.Adapter<BookAdapter.BookHolder>() {
 
-    override fun getView(position: Int, view: View?, parent: ViewGroup): View {
-        val inflater = context.layoutInflater
-        val rowView = inflater.inflate(R.layout.book_result_detail, null, true)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookHolder {
+        val inflatedView =
+            LayoutInflater.from(parent.context).inflate(R.layout.book_result_detail, parent, false)
+        return BookHolder(inflatedView)
+    }
 
-        val coverImage = rowView.findViewById(R.id.book_image) as ImageView
-        val title = rowView.findViewById(R.id.title) as TextView
-        val author = rowView.findViewById(R.id.author) as TextView
+    override fun getItemCount() = books.size
 
-        Picasso.get().load(books[position].coverUrl)
-            .fit()
-            .placeholder(R.drawable.empty_book_result)
-            .into(coverImage)
-        title.text = books[position].title
-        author.text = books[position].author
+    override fun onBindViewHolder(holder: BookHolder, position: Int) {
+        val book = books[position]
+        holder.bindBook(book)
+    }
 
-        return rowView
+    class BookHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+        private var view: View = v
+        private var book: Book? = null
+
+        fun bindBook(book: Book) {
+            this.book = book
+
+            Picasso.get().load(book.coverUrl)
+                .fit()
+                .placeholder(R.drawable.empty_book_result)
+                .into(view.book_image)
+            view.title.text = book.title
+            view.author.text = book.author
+        }
+
+        init {
+            v.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val context = itemView.context
+            val intent = Intent(context, BookDetailActivity::class.java).apply {
+                putExtra("bookId", book?.bookId)
+            }
+            context.startActivity(intent)
+        }
     }
 }
