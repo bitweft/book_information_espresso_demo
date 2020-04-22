@@ -2,6 +2,7 @@ package com.bookinformation.activities
 
 import android.os.Bundle
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,15 +16,15 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
-import java.util.ArrayList
+import java.util.*
 
 class BookListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var bookAdapter: BookAdapter
     private lateinit var progressBar: ProgressBar
     private val books = ArrayList<Book>()
+    lateinit var errorMessage : TextView
     var idlingResource: SimpleIdlingResource? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +44,7 @@ class BookListActivity : AppCompatActivity() {
 
         progressBar = findViewById(R.id.progress_bar)
         progressBar.visibility = ProgressBar.VISIBLE
+        errorMessage = findViewById<TextView>(R.id.error_message)
 
         idlingResource?.setIdleState(false)
         BookApiClient().searchBooks(bookName, callback())
@@ -51,6 +53,10 @@ class BookListActivity : AppCompatActivity() {
     private fun callback(): Callback {
         return object : Callback {
             override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread {
+                    errorMessage.visibility = TextView.VISIBLE
+                    progressBar.visibility = ProgressBar.GONE
+                }
                 idlingResource?.setIdleState(true)
             }
 
