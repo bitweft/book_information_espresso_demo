@@ -19,6 +19,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            debuggable true
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -27,6 +30,18 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+        qa {
+            dimension "version"
+            applicationIdSuffix ".test"
+            versionNameSuffix "-test"
+        }
+        prod {
+            dimension "version"
+        }
     }
 }
 
@@ -41,6 +56,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation group: 'androidx.recyclerview', name: 'recyclerview', version: '1.1.0'
     implementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
+    implementation "com.squareup.okhttp3:mockwebserver:4.5.0"
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
