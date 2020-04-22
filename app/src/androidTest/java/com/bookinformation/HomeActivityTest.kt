@@ -19,7 +19,7 @@ import org.junit.runner.RunWith
 class HomeActivityTest {
 
     @get:Rule
-    val activityRule = ActivityTestRule(HomeActivity::class.java)
+    val activityRule = ActivityTestRule(HomeActivity::class.java, true, true)
 
     @Test
     fun checkButtonDisabledOnLaunch() {
