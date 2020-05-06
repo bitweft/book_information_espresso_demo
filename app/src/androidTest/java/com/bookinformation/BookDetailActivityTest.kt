@@ -9,8 +9,8 @@ import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
 import com.bookinformation.activities.BookDetailActivity
-import com.bookinformation.constants.Constants.OPEN_LIBRARY_HOST
-import com.bookinformation.constants.Constants.OPEN_LIBRARY_PORT
+import com.bookinformation.configs.Configs.OPEN_LIBRARY_HOST
+import com.bookinformation.configs.Configs.OPEN_LIBRARY_PORT
 import com.example.bookinformation.R
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer

@@ -16,6 +16,14 @@
         android:max="100"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/error_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:text="@string/error_message"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/books_list"
         android:layout_width="match_parent"

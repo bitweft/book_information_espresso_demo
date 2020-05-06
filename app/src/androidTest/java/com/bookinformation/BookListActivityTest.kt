@@ -12,8 +12,8 @@ import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
 import com.bookinformation.activities.BookListActivity
 import com.bookinformation.adapter.BookAdapter
-import com.bookinformation.constants.Constants.OPEN_LIBRARY_HOST
-import com.bookinformation.constants.Constants.OPEN_LIBRARY_PORT
+import com.bookinformation.configs.Configs.OPEN_LIBRARY_HOST
+import com.bookinformation.configs.Configs.OPEN_LIBRARY_PORT
 import com.bookinformation.helpers.atPositionOnView
 import com.example.bookinformation.R
 import okhttp3.mockwebserver.MockResponse
@@ -73,11 +73,11 @@ class BookListActivityTest {
     object MockResponses {
         val detailResponse = """
             {
-            "title": "someTitle",
-            "publish_date": "somePublishDate",
-            "number_of_pages": 500,
-            "by_statement": "someAuthor"
-        }
+               "title": "someTitle",
+               "publish_date": "somePublishDate",
+               "number_of_pages": 500,
+               "by_statement": "someAuthor"
+            }
         """.trimIndent()
 
         val searchResponse = """
